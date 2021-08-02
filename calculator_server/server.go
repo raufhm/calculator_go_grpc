@@ -14,16 +14,16 @@ type Server struct {
 	calculatorpb.UnimplementedCalculatorServiceServer
 }
 
-func (server *Server) Sum(ctx context.Context, req *calculatorpb.SumRequest) (*calculatorpb.SumResponse, error) {
+func (server *Server) Sum(ctx context.Context, req *calculatorpb.SumRequest) (response *calculatorpb.SumResponse, err error) {
 	fmt.Printf("Receive Sum RPC: %v", req)
 	firstNumber := req.FirstNumber
 	secondNumber := req.SecondNumber
 	result := firstNumber + secondNumber
-	res := &calculatorpb.SumResponse{
+	response = &calculatorpb.SumResponse{
 		SumResult: result,
 	}
 
-	return res, nil
+	return response, err
 }
 
 func main() {
